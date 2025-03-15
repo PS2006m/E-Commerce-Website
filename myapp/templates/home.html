@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    {% load static %}
+    <style>
+        .second-section {
+            height: 200px;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            background-image:linear-gradient(lightblue 40%,#FFFFED 60%);
+        }
+        .profile-placeholder {
+            width: 40px;                         
+            height: 40px;           
+            background-color: #007bff; 
+            color: white;             
+            font-weight: bold;        
+            font-size: 20px;          
+            display: flex;            
+            align-items: center;      
+            justify-content: center;  
+            border-radius: 50%;       
+            text-transform: uppercase; 
+            margin: auto;             
+        }
+        .effect{
+            transition: 0.3s;
+        }
+        .effect:hover{
+            transform: translateY(-10px);
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body style="background-color:#FFFFED">
+    <section>
+    <div class="navbar navbar-expand navbar-expand-* container-fluid" style="background-color: black;   justify-content: space-between; padding: 10px 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item" style="margin-right: 20px;">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item" style="margin-right: 20px;">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'courses' %}">Courses</a>
+            </li>
+            {% if request.session.email %}
+                {% if admin %}
+                    <li class="nav-item" style="margin-right: 20px;">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'adminPage' %}">Admin Page</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'cartPage' %}">Cart</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'signup' %}">Signup</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'api' %}">
+                    API Prompt
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'chat' %}">
+                    Chat
+                </a>
+            </li> -->
+        </ul>
+    
+        <div>
+            <svg width="160" height="70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" style="display: inline-block; vertical-align: middle;">
+                <circle cx="60" cy="75" r="15" fill="#FFD700" />
+                <line x1="75" y1="75" x2="130" y2="75" stroke="#FFD700" stroke-width="6" />
+                <circle cx="145" cy="75" r="15" fill="#FFD700" />
+                <line x1="160" y1="75" x2="220" y2="75" stroke="#FFD700" stroke-width="6" />
+                <circle cx="235" cy="75" r="15" fill="#FFD700" />
+                <text x="260" y="90" fill="#FFD700" font-size="68" font-family="Arial, sans-serif" font-weight="bold" style="size:100px">TechFluent</text>
+            </svg>
+        </div>
+    
+        <ul class="navbar-nav">
+            {% if request.session.email %}
+                <li class="nav-item">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'profile' %}">
+                        <div class="profile-placeholder">{{ name }}</div>
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'profile' %}">
+                        <div class="profile-placeholder">{{ name }}</div>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    </section>
+    {% if msg %}
+        <div class="alert alert-success d-flex justify-content-between align-items-center">{{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger d-flex justify-content-between align-items-center">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <section class="second-section">
+        <h1 align="center">Your Learning Journey begins here</h1>
+        <br>
+        <form action="{% url 'search' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="searchInput" placeholder="Search Courses . . . ">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </section>
+    <marquee direction="left" scrollamount="10" behavior="scroll">
+        {% for i in course_names %}
+            <div style="display:inline-block" class="flex flex-around"><h1><pre>{{i}}            </pre></h1></div>
+        {% endfor %}
+    </marquee>
+    <section>
+        <br>
+        <h1 align="center">Trending Courses</h1>
+        <div class="d-flex flex-wrap justify-content-center container-fluid" style="padding:20px;">
+            {% for i in popular %}
+                <div class="card effect" style="width: 300px; margin: 15px; border-radius: 20px; background-color: #f0f8ff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                    {% if i.course_img %}
+                        <img src="{{ i.course_img.url }}" class="card-body img-fluid" alt="{{ i.course_name }}">
+                    {% else %}
+                        <img src="" class="card-img-top" alt="No image available" style="height: 200px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    {% endif %}
+                    <div class="card-body" style="background-color: #007bff; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; color: white; padding: 20px;">
+                        <h5 class="card-item" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase; text-align: center;">{{ i.course_name }}</h5>
+                        <p class="card-item" style="text-align: center; font-size: 1rem;">{{ i.course_price }}</p>
+                        <p class="card-item" style="text-align: center; font-size: 0.9rem;">Bought by {{ i.course_bought }} people</p>
+                        <p class="card-item" style="text-align: center; font-size: 0.9rem;">{{ i.course_length }} Days</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section> 
+    <section>
+        <br>
+        <h1 align="center">Free Courses</h1>
+        <div class="d-flex flex-wrap justify-content-center" style="padding:20px;">
+            {% for j in free %}
+                <div class="card effect" style="width: 300px; margin: 15px; border-radius: 20px; background-color: #f0f8ff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                    {% if j.course_img %}
+                        <img src="{{ j.course_img.url }}" class="card-img-top" alt="{{ j.course_name }}" style="height: 200px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    {% else %}
+                        <img src="" class="card-img-top" alt="No image available" style="height: 200px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    {% endif %}
+                    <div class="card-body" style="background-color: #007bff; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; color: white; padding: 20px;">
+                        <h5 class="card-item" style="font-size: 20px; font-weight: bold; text-transform: uppercase; text-align: center;">{{ j.course_name }}</h5>
+                        <p class="card-item" style="text-align: center; font-size: 16px;">{{ j.course_price }}</p>
+                        <p class="card-item" style="text-align: center; font-size: 14px">Bought by {{ j.course_bought }} people</p>
+                        <p class="card-item" style="text-align: center; font-size: 14px;">{{ j.course_length }} Days</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section style="padding: 50px;">
+        <h1 align="center">What Our Learners Say</h1>
+        <div id="testimonial-container" class="d-flex flex-wrap justify-content-center"></div>
+    </section>
+    <script>
+        const testimonials = [
+            {
+                name: "Het Patel",
+                message: "TechFluent has been an amazing learning platform for me. The courses are top-notch and very easy to follow!"
+            },
+            {
+                name: "Pranav Six",
+                message: "I have gained so many valuable skills through TechFluent. The courses are well-structured and engaging."
+            },
+            {
+                name: "PopatLal",
+                message: "The courses helped me advance in my career. I highly recommend TechFluent to anyone looking to learn new skills."
+            }
+        ];
+        const testimonialContainer = document.getElementById('testimonial-container');
+        testimonials.forEach(testimonial => {
+            const testimonialCard = document.createElement('div');
+            testimonialCard.classList.add('card');
+            testimonialCard.style.width = '300px';
+            testimonialCard.style.margin = '15px';
+            testimonialCard.style.borderRadius = '15px';
+    
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+            cardBody.style.padding = '20px';
+    
+            const message = document.createElement('p');
+            message.classList.add('card-item');
+            message.style.fontStyle = 'italic';
+            message.style.textAlign = 'center';
+            message.textContent = `"${testimonial.message}"`;
+    
+            const name = document.createElement('p');
+            name.classList.add('card-item');
+            name.style.fontWeight = 'bold';
+            name.style.textAlign = 'center';
+            name.textContent = `- ${testimonial.name}`;
+            cardBody.appendChild(message);
+            cardBody.appendChild(name)
+            testimonialCard.appendChild(cardBody);
+            testimonialContainer.appendChild(testimonialCard);
+        });
+    </script>
+    <footer style="background-color: #3e4551; text-align: center; color: white; padding: 20px;">
+        <div style=" text-align: left; margin: 10px;">
+            <h5>About Us</h5>
+            <p style="text-indent:50px">TechFluent is an extremely well-reputed learning platform created by our founder Mr. Pratham Shah. It started out as a vision to make educational content available to everyone. We at TechFluent continue to progress further towards this mission. Every skill you learn here helps.</p>
+        </div>
+        <div style="text-align: left; margin: 10px;">
+            <h5>Links</h5>
+            <ul style="list-style:none">
+                <li><a href="#!" style="color: white;text-decoration:none">Email : randomemail@gmail.com</a></li>
+                <li><a href="#!" style="color: white;text-decoration:none">Address : 222,Street,City,State</a></li>
+            </ul>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <h5>Join Us!</h5>
+        </div>
+    </footer>
+    
+</body>
+</html>

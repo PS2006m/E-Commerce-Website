@@ -1,0 +1,155 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Chat</title>
+    {% load static %}
+    <style>
+        
+
+        img {
+            height: 300px;
+            width: 300px;
+        }
+
+        body {
+            margin: 0; 
+        }
+        .profile-placeholder {
+            width: 40px;              /* Diameter of the circle */             
+            height: 40px;             /* Diameter of the circle */
+            background-color: #007bff; /* Background color (adjust as needed) */
+            color: white;             /* Text color */
+            font-weight: bold;        /* Bold text */
+            font-size: 20px;          /* Text size */
+            display: flex;            /* Center the text */
+            align-items: center;      /* Vertical centering */
+            justify-content: center;  /* Horizontal centering */
+            border-radius: 50%;       /* Makes it circular */
+            text-transform: uppercase; /* Ensures the text is uppercase */
+            margin: auto;             /* Center it inside the nav */
+        }
+        .effect{
+            transition: 0.3s;
+        }
+        .effect:hover{
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="navbar navbar-expand container-fluid" style="background-color: black; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
+            <ul class="navbar-nav" style="list-style: none; margin: 0; padding: 0; display: flex;">
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item" style="margin-right: 20px;">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'courses' %}">Courses</a>
+                </li>
+                {% if request.session.email %}
+                    {% if admin %}
+                        <li class="nav-item" style="margin-right: 20px;">
+                            <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'adminPage' %}">Admin Page</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item" style="margin-right: 20px;">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'cartPage' %}">Cart</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 20px;">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item" style="margin-right: 20px;">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'signup' %}">Signup</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 20px;">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'chat' %}">
+                        Chat
+                    </a>
+                </li>
+            </ul>
+        
+           
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <svg width="160" height="70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" style="display: inline-block; vertical-align: middle;">
+                    
+                    <circle cx="60" cy="75" r="15" fill="#FFD700" />
+                    <line x1="75" y1="75" x2="130" y2="75" stroke="#FFD700" stroke-width="6" />
+                    <circle cx="145" cy="75" r="15" fill="#FFD700" />
+                    <line x1="160" y1="75" x2="220" y2="75" stroke="#FFD700" stroke-width="6" />
+                    <circle cx="235" cy="75" r="15" fill="#FFD700" />
+                    <text x="260" y="90" fill="#FFD700" font-size="68" font-family="Arial, sans-serif" font-weight="bold" style="size:100px">TechFluent</text>
+                </svg>
+            </div>
+        
+            <ul class="navbar-nav" style="list-style: none; margin: 0; padding: 0; display: flex;">
+                {% if request.session.email %}
+                    <li class="nav-item">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'profile' %}">
+                            <div class="profile-placeholder">{{ name }}</div>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'profile' %}">
+                            <div class="profile-placeholder">{{ name }}</div>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        </section>
+        <p>Not Working</p>
+        <!-- <h2>Live Chat</h2>
+        <div id="chat-log"></div>
+        <input type="text" id="chat-message-input" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    
+        <script>
+            const username = prompt("Enter your username:");
+            const chatSocket = new WebSocket(
+                (window.location.protocol === "https:" ? "wss://" : "ws://") + 
+                window.location.host + "/ws/chat/"
+            );
+        
+            chatSocket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                const chatLog = document.getElementById("chat-log");
+                chatLog.innerHTML += `<p><strong>${data.username}:</strong> ${data.message} (${data.timestamp || ''})</p>`;
+            };
+        
+            document.getElementById("send-button").onclick = function() {
+                const messageInput = document.getElementById("chat-message-input");
+                const message = messageInput.value;
+                chatSocket.send(JSON.stringify({"message": message, "username": username}));
+                messageInput.value = "";
+            };
+        </script> -->
+        
+
+
+    <footer style="background-color: #3e4551; text-align: center; color: white; padding: 20px;">
+        <div style=" text-align: left; margin: 10px;">
+            <h5>About Us</h5>
+            <p style="text-indent:50px">TechFluent is an extremely well-reputed learning platform created by our founder Mr. Pratham Shah. It started out as a vision to make educational content available to everyone. We at TechFluent continue to progress further towards this mission. Every skill you learn here helps.</p>
+        </div>
+        <div style="text-align: left; margin: 10px;">
+            <h5>Links</h5>
+            <ul style="list-style:none">
+                <li><a href="#!" style="color: white;text-decoration:none">Email : randomemail@gmail.com</a></li>
+                <li><a href="#!" style="color: white;text-decoration:none">Address : 222,Street,City,State</a></li>
+            </ul>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <h5>Join Us!</h5>
+        </div>
+    </footer>
+</body>
+</html>
