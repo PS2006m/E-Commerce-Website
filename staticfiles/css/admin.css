@@ -1,0 +1,27 @@
+section.active{
+    display: block;
+}
+.summary-cards {
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 1.5rem; */
+    justify-content: space-around;
+    /* margin: 2rem 0; */
+  }
+  
+  .card {
+    background-color: white;
+    border: 2px solid #00E074;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }

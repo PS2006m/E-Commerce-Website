@@ -133,8 +133,15 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-INSTALLED_APPS.append('whitenoise.runserver_nostatic')
-MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')  # Ensures static files are served in development
+
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")  # Enables WhiteNoise
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Required for production
+
+# Enable gzip and Brotli compression for better performance
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

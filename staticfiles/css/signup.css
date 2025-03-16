@@ -1,0 +1,23 @@
+body {
+    margin: 0; /* Remove default margin */
+}
+.second-section {
+    height: calc(100vh - 70px); /* Adjust for navbar height */
+    background-image: url('{% static "images/s1.jpeg" %}'); /* Path to your background image */
+    background-size: cover; /* Cover the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    display: flex; /* Center content vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+.form-container {
+    background-color: lightslategray; /* White background with some transparency */
+    border-radius: 8px; /* Rounded corners */
+    padding: 30px; /* Inner spacing */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 300px; /* Set a fixed width for the form */
+}
+.form-container h2 {
+    margin-bottom: 20px; /* Space below the heading */
+}
