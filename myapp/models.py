@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
 class ChatMessage(models.Model):
     username = models.CharField(max_length=255)  # Store username
     message = models.TextField()

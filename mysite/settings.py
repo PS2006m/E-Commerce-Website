@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'channels',
-    'cloudinary',
-    'cloudinary_storage'
 ]
 
 # ✅ ASGI application setup
