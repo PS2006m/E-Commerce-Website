@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'channels',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 # ✅ ASGI application setup
@@ -130,6 +132,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dkty1thga',
+    'API_KEY': '849772912341497',
+    'API_SECRET': '0MTPHt57gbHhk77cVEE1w0zKIUc'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# MEDIA_URL = '/media/'  # Optional
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
