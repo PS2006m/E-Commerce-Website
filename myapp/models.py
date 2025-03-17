@@ -22,7 +22,7 @@ class Courses(models.Model):
     course_name=models.CharField(max_length=100)
     course_price=models.FloatField()
     course_length=models.CharField(max_length=100)
-    course_img = CloudinaryField('image')
+    course_img = models.ImageField(upload_to='media/course_images/')
     course_bought=models.PositiveIntegerField(default=0)
     
     def __str__(self):
