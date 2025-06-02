@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
     {% load static %}
+
     <style>
-        
-
         img {
-            height: 300px;
-            width: 300px;
+            max-height: 300px;
+            width: 100%;
+            object-fit: cover;
         }
-
         body {
-            margin: 0; 
+            margin: 0;
         }
         .profile-placeholder {
-            width: 40px;              /* Diameter of the circle */             
-            height: 40px;             /* Diameter of the circle */
-            background-color: #007bff; /* Background color (adjust as needed) */
-            color: white;             /* Text color */
-            font-weight: bold;        /* Bold text */
-            font-size: 20px;          /* Text size */
-            display: flex;            /* Center the text */
-            align-items: center;      /* Vertical centering */
-            justify-content: center;  /* Horizontal centering */
-            border-radius: 50%;       /* Makes it circular */
-            text-transform: uppercase; /* Ensures the text is uppercase */
-            margin: auto;             /* Center it inside the nav */
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-transform: uppercase;
+            margin: auto;
         }
-        .effect{
+        .effect {
             transition: 0.3s;
         }
-        .effect:hover{
+        .effect:hover {
             transform: translateY(-5px);
         }
     </style>
+
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <section>
-    <div class="navbar navbar-expand container-fluid" style="background-color: black; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
-        <ul class="navbar-nav" style="list-style: none; margin: 0; padding: 0; display: flex;">
+
+  <section>
+    <div class="navbar navbar-expand-lg navbar-dark bg-black px-3 py-2">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <ul class="navbar-nav flex-row flex-wrap">
             <li class="nav-item" style="margin-right: 20px;">
                 <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
@@ -78,12 +80,20 @@
             <li class="nav-item">
                 <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'contact' %}">Contact</a>
             </li>
+            <!-- <li class="nav-item">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'api' %}">
+                    API Prompt
+                </a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'chat' %}">
+                    Chat
+                </a>
+            </li> -->
         </ul>
     
-       
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div>
             <svg width="160" height="70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" style="display: inline-block; vertical-align: middle;">
-                
                 <circle cx="60" cy="75" r="15" fill="#FFD700" />
                 <line x1="75" y1="75" x2="130" y2="75" stroke="#FFD700" stroke-width="6" />
                 <circle cx="145" cy="75" r="15" fill="#FFD700" />
@@ -93,7 +103,7 @@
             </svg>
         </div>
     
-        <ul class="navbar-nav" style="list-style: none; margin: 0; padding: 0; display: flex;">
+        <ul class="navbar-nav">
             {% if request.session.email %}
                 <li class="nav-item">
                     <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'profile' %}">
@@ -109,60 +119,78 @@
             {% endif %}
         </ul>
     </div>
+
+    </div>
     </section>
-    <section style="background-image:linear-gradient(gray 25%,#FFFFED 75%);">
-        {% if msg %}
-            <div class="alert alert-success d-flex justify-content-between align-items-center">{{ msg }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        {% endif %}
-        {% if check %}
-                <div class="alert alert-danger d-flex justify-content-between align-items-center">Your Total Price is {{ bought }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-        {% endif %}
-        <br>
-        <h1 align="center" style="font-family: Arial, sans-serif; font-weight: bold;">Our Courses</h1>
-        <br>
-        <div class="d-flex flex-wrap justify-content-center" style="padding:20px;">
+<!-- COURSES SECTION -->
+<section style="background-image:linear-gradient(gray 25%,#FFFFED 75%);">
+    {% if msg %}
+        <div class="alert alert-success d-flex justify-content-between align-items-center container mt-3">
+            {{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+    {% if check %}
+        <div class="alert alert-danger d-flex justify-content-between align-items-center container mt-3">
+            Your Total Price is {{ bought }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+
+    <div class="container py-4">
+        <h1 class="text-center fw-bold" style="font-family: Arial, sans-serif;">Our Courses</h1>
+        <div class="row justify-content-center mt-4">
             {% for i in cour %}
-                <div class="card effect" style="width: 300px; margin: 15px; border-radius: 20px; background-color: #f0f8ff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
-                    {% if i.course_img %}
-                        <img src="{{ i.course_img.url }}" class="card-img-top" alt="{{ i.course_name }}" style="height: 200px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    {% else %}
-                        <img src="" class="card-img-top" alt="No image available" style="height: 200px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    {% endif %}
-                    <div class="card-body" style="background-color: #007bff; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; color: white; padding: 20px;">
-                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase; text-align: center;">{{ i.course_name }}</h5>
-                        <p class="card-text" style="text-align: center; font-size: 1rem;">{{ i.course_price }} Rupees</p>
-                        <p class="card-text" style="text-align: center; font-size: 0.9rem;">Bought by {{ i.course_bought }} people</p>
-                        <p class="card-text" style="text-align: center; font-size: 0.9rem;">{{ i.course_length }} Days</p>
-                        <form action="{% url 'middleCart' %}" method="post">
-                            {% csrf_token %}
-                            <input value="{{i.course_id}}" name="coid" hidden>
-                            <button class="btn btn-secondary">Add to cart</button>
-                        </form>
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card h-100 effect shadow" style="border-radius: 20px; background-color: #f0f8ff;">
+                        {% if i.course_img %}
+                            <img src="{{ i.course_img.url }}" class="card-img-top rounded-top" alt="{{ i.course_name }}">
+                        {% else %}
+                            <img src="" class="card-img-top rounded-top" alt="No image available">
+                        {% endif %}
+                        <div class="card-body text-white" style="background-color: #007bff; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                            <h5 class="card-title text-center fw-bold text-uppercase">{{ i.course_name }}</h5>
+                            <p class="card-text text-center">{{ i.course_price }} Rupees</p>
+                            <p class="card-text text-center">Bought by {{ i.course_bought }} people</p>
+                            <p class="card-text text-center">{{ i.course_length }} Days</p>
+                            <form action="{% url 'middleCart' %}" method="post" class="text-center">
+                                {% csrf_token %}
+                                <input value="{{i.course_id}}" name="coid" type="hidden">
+                                <button class="btn btn-secondary">Add to cart</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </section>
-    <footer style="background-color: #3e4551; text-align: center; color: white; padding: 20px;">
-        <div style=" text-align: left; margin: 10px;">
-            <h5>About Us</h5>
-            <p style="text-indent:50px">TechFluent is an extremely well-reputed learning platform created by our founder Mr. Pratham Shah. It started out as a vision to make educational content available to everyone. We at TechFluent continue to progress further towards this mission. Every skill you learn here helps.</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-white pt-4" style="background-color: #3e4551;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h5>About Us</h5>
+                <p style="text-indent: 50px;">
+                    TechFluent is an extremely well-reputed learning platform created by our founder Mr. Pratham Shah. 
+                    It started out as a vision to make educational content available to everyone. We at TechFluent continue 
+                    to progress further towards this mission. Every skill you learn here helps.
+                </p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#!" class="text-white text-decoration-none">Email: randomemail@gmail.com</a></li>
+                    <li><a href="#!" class="text-white text-decoration-none">Address: 222, Street, City, State</a></li>
+                </ul>
+            </div>
         </div>
-        <div style="text-align: left; margin: 10px;">
-            <h5>Links</h5>
-            <ul style="list-style:none">
-                <li><a href="#!" style="color: white;text-decoration:none">Email : randomemail@gmail.com</a></li>
-                <li><a href="#!" style="color: white;text-decoration:none">Address : 222,Street,City,State</a></li>
-            </ul>
-        </div>
-        <div style="text-align: center; margin-top: 10px;">
+        <div class="text-center pb-3">
             <h5>Join Us!</h5>
         </div>
-    </footer>
+    </div>
+</footer>
 
 </body>
 </html>
