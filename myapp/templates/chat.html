@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Live Chat</title>
@@ -48,9 +48,9 @@
                 </li>
                 {% if request.session.email %}
                     {% if admin %}
-                        <li class="nav-item" style="margin-right: 20px;">
-                            <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'adminPage' %}">Admin Page</a>
-                        </li>
+                        <!-- <li class="nav-item" style="margin-right: 20px;">
+                            <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="/">Admin Page</a>
+                        </li> -->
                     {% endif %}
                     <li class="nav-item" style="margin-right: 20px;">
                         <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'cartPage' %}">Cart</a>
@@ -69,11 +69,11 @@
                 <li class="nav-item">
                     <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'contact' %}">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="{% url 'chat' %}">
+                <!-- <li class="nav-item">
+                    <a style="color: white; text-decoration: none; font-weight: bold;" class="nav-link" href="/">
                         Chat
                     </a>
-                </li>
+                </li> -->
             </ul>
         
            
